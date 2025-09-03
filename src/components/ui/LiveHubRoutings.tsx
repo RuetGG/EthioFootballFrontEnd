@@ -3,9 +3,11 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Image from "next/image";
 
-const LiveHubRoutings = () => {
-  const currentPath = "/liveScores";
+interface LiveHubRoutingsProps {
+  currentPath: string;
+}
 
+const LiveHubRoutings: React.FC<LiveHubRoutingsProps> = ({ currentPath }) => {
   const links = [
     { href: "/liveScores", label: "Live Scores", icon: "access_time.svg" },
     { href: "/fixtures", label: "Fixtures", icon: "calendar_today.svg" },
@@ -26,10 +28,8 @@ const LiveHubRoutings = () => {
             href={link.href}
             onMouseEnter={() => setHovered(link.href)}
             onMouseLeave={() => setHovered(null)}
-            className={`
-              relative flex items-center justify-center gap-2
-              w-full sm:w-[200px] h-[40px] 
-              rounded text-center
+            className={`relative flex items-center justify-center gap-2
+              w-full sm:w-[200px] h-[40px] rounded text-center
               transition-colors duration-300
               ${isHighlighted ? "bg-white text-black" : "text-gray-700"}
             `}

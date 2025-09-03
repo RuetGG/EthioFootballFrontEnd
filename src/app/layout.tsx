@@ -13,7 +13,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-      className='font-newsreader'
+      className='font-newsreader bg-gray-50 min-h-screen'
       >{children}</body>
     </html>
   )
