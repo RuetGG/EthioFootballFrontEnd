@@ -9,7 +9,7 @@ export default function NewsSources() {
 	];
 
 	return (
-		<div className="p-6 border rounded-2xl bg-gray-50">
+		<div className="p-6 border bg-gray-50">
 			<h2 className="font-semibold text-lg mb-3">News Sources</h2>
 			<ul className="flex flex-wrap gap-4 text-sm text-gray-700">
 				{sources.map((src) => (

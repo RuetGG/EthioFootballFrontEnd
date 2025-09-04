@@ -3,26 +3,20 @@
 interface NewsTabsProps {
 	activeTab: string;
 	setActiveTab: (tab: string) => void;
+	tabs: string[];
 }
 
-const tabs = [
-	"All News",
-	"Premier League",
-	"Ethiopian Football",
-	"International",
-];
-
-export default function NewsTabs({ activeTab, setActiveTab }: NewsTabsProps) {
+export default function NewsTabs({ activeTab, setActiveTab, tabs }: NewsTabsProps) {
 	return (
-		<div className="flex justify-center gap-4 bg-gray-100 rounded-full p-2">
+		<div className="flex w-fit m-auto my-8 justify-center gap-2 bg-[#E7F2EC] overflow-x-auto rounded-md px-4 py-2">
 			{tabs.map((tab) => (
 				<button
 					key={tab}
 					onClick={() => setActiveTab(tab)}
-					className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+					className={`px-4 py-2 text-sm font-medium rounded-md whitespace-nowrap transition ${
 						activeTab === tab
 							? "bg-green-600 text-white"
-							: "hover:bg-green-100 text-gray-700"
+							: "bg-white text-gray-800 hover:bg-gray-100"
 					}`}
 				>
 					{tab}
