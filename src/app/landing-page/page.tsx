@@ -14,6 +14,7 @@ import {
 export default function EthiopianFootballPage() {
   return (
     <div className="min-h-screen bg-white">
+      {/* Hero Section */}
       <section
         id="hero"
         className="relative h-screen flex items-center justify-center overflow-hidden"
@@ -27,14 +28,14 @@ export default function EthiopianFootballPage() {
 
         <div className="absolute inset-0 bg-black/40 z-10"></div>
 
-        <header className="fixed top-0 left-0 w-full z-50 bg-green-900 px-8 py-4 flex items-center justify-between shadow-md">
+        {/* <header className="fixed top-0 left-0 w-full z-50 bg-green-900 px-8 py-4 flex items-center justify-between shadow-md">
           <div className="flex items-center space-x-20">
-            {/* Logo */}
+        
             <Link href="/" className="text-2xl  text-white">
               Logo
             </Link>
 
-            {/* Navigation */}
+          
             <nav className="flex space-x-6 text-white font-medium">
               <Link href="#hero" className="hover:text-amber-400 transition">
                 Home Page
@@ -54,12 +55,12 @@ export default function EthiopianFootballPage() {
             </nav>
           </div>
 
-          {/* Right Side: Language Switch */}
+         
           <Button className="bg-white text-gray-900 px-4 py-2 rounded-full shadow-md hover:bg-gray-100 flex items-center gap-2">
             <Globe className="h-5 w-5" />
             ENG
           </Button>
-        </header>
+        </header> */}
 
         <div className="absolute bottom-0 left-0 z-10 text-white p-8 md:p-12 max-w-2xl">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-amber-400 leading-tight">
@@ -72,7 +73,7 @@ export default function EthiopianFootballPage() {
           </p>
           <div className="flex gap-4">
             <Button className="bg-white text-gray-900 px-6 py-3 font-semibold rounded-none">
-              <Link href="/chat">Join</Link>
+              <Link href="/">Join</Link>
             </Button>
             <Button
               variant="outline"
@@ -110,6 +111,7 @@ export default function EthiopianFootballPage() {
         </div>
       </section>
 
+      {/* Ultimate Hub Section */}
       <section id="services" className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <Card className="overflow-hidden border border-gray-200 bg-[#E7F2EC] shadow-lg">
@@ -200,7 +202,7 @@ export default function EthiopianFootballPage() {
 
           <div className="text-center mt-12">
             <Button className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-none">
-              <Link href="/chat">Learn More →</Link>
+              <Link href="/">Learn More →</Link>
             </Button>
           </div>
         </div>
