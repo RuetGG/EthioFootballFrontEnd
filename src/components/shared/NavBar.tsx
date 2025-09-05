@@ -6,12 +6,12 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { name: "Home", href: "/landing-page" },
+  { name: "Chat", href: "/chat" },
   { name: "Live Hub", href: "/liveScores" },
   { name: "Compare", href: "/compare" },
   { name: "News", href: "/news" },
-  { name: "My Clubs", href: "/my-clubs" },
   { name: "Offline", href: "/Offline" },
-  { name: "Chat", href: "/chat" },
+  // { name: "My Clubs", href: "/my-clubs" },
 ];
 
 export default function Navbar() {

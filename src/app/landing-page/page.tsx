@@ -72,7 +72,7 @@ export default function EthiopianFootballPage() {
           </p>
           <div className="flex gap-4">
             <Button className="bg-white text-gray-900 px-6 py-3 font-semibold rounded-none">
-              <Link href="/">Join</Link>
+              <Link href="/chat">Join</Link>
             </Button>
             <Button
               variant="outline"
@@ -110,7 +110,6 @@ export default function EthiopianFootballPage() {
         </div>
       </section>
 
-      {/* Ultimate Hub Section */}
       <section id="services" className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <Card className="overflow-hidden border border-gray-200 bg-[#E7F2EC] shadow-lg">
@@ -201,7 +200,7 @@ export default function EthiopianFootballPage() {
 
           <div className="text-center mt-12">
             <Button className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-none">
-              <Link href="/">Learn More →</Link>
+              <Link href="/chat">Learn More →</Link>
             </Button>
           </div>
         </div>
