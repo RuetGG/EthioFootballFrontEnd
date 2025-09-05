@@ -13,9 +13,6 @@ export const compareApi = createApi({
   endpoints: (builder) => ({
     getComparison: builder.query<TeamComparison, CompareParams>({
       query: ({ teamA, teamB }) => {
-        // For now, return the mock data endpoint
-        // To switch to real API, change this to:
-        // return `/compare/${teamA}-vs-${teamB}`;
         return '/compare';
       },
       providesTags: ["Compare"],

@@ -1,4 +1,3 @@
-import { useTranslation } from '../../lib/i18n/useTranslation';
 import type { FormResult } from '../../types/compare';
 
 interface FormRowProps {
@@ -10,7 +9,6 @@ interface FormRowProps {
  * W = Win (green), D = Draw (yellow), L = Loss (red)
  */
 export default function FormRow({ form }: FormRowProps) {
-  const { t } = useTranslation();
 
   const getFormStyle = (result: FormResult) => {
     switch (result) {
@@ -28,11 +26,11 @@ export default function FormRow({ form }: FormRowProps) {
   const getFormLabel = (result: FormResult) => {
     switch (result) {
       case 'W':
-        return t('compare.win');
+        return 'Win';
       case 'D':
-        return t('compare.draw');
+        return 'Draw';
       case 'L':
-        return t('compare.loss');
+        return 'Loss';
       default:
         return result;
     }

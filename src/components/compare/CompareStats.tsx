@@ -1,4 +1,3 @@
-import { useTranslation } from '../../lib/i18n/useTranslation';
 import type { TeamData } from '../../types/compare';
 
 interface CompareStatsProps {
@@ -11,7 +10,6 @@ interface CompareStatsProps {
  * Shows honors count and recent wins comparison
  */
 export default function CompareStats({ teamA, teamB }: CompareStatsProps) {
-  const { t } = useTranslation();
 
   const getWinsCount = (form: string[]) => {
     return form.filter(result => result === 'W').length;
@@ -23,7 +21,7 @@ export default function CompareStats({ teamA, teamB }: CompareStatsProps) {
 
   const stats = [
     {
-      label: t('compare.honors'),
+      label: 'Total Honors',
       teamA: getHonorsCount(teamA.honors),
       teamB: getHonorsCount(teamB.honors),
     },

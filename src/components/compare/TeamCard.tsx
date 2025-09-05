@@ -1,4 +1,3 @@
-import { useTranslation } from '../../lib/i18n/useTranslation';
 import FormRow from './FormRow';
 import type { TeamData } from '../../types/compare';
 
@@ -12,7 +11,6 @@ interface TeamCardProps {
  * Shows team crest, name, honors, recent form, and notable players
  */
 export default function TeamCard({ team, position }: TeamCardProps) {
-  const { t } = useTranslation();
 
   // Generate team initials for fallback crest
   const getTeamInitials = (name: string) => {
@@ -39,7 +37,7 @@ export default function TeamCard({ team, position }: TeamCardProps) {
       {/* Honors Section */}
       <div className="mb-6">
         <h3 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">
-          {t('compare.honors')}
+          Honors
         </h3>
         <ul className="space-y-2">
           {team.honors.map((honor, index) => (
@@ -54,7 +52,7 @@ export default function TeamCard({ team, position }: TeamCardProps) {
       {/* Recent Form Section */}
       <div className="mb-6">
         <h3 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">
-          {t('compare.recentForm')}
+          Recent Form
         </h3>
         <FormRow form={team.recent_form} />
       </div>
@@ -62,7 +60,7 @@ export default function TeamCard({ team, position }: TeamCardProps) {
       {/* Notable Players Section */}
       <div className="mb-6">
         <h3 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">
-          {t('compare.notablePlayers')}
+          Notable Players
         </h3>
         <div className="flex flex-wrap gap-2">
           {team.notable_players.map((player, index) => (
@@ -79,7 +77,7 @@ export default function TeamCard({ team, position }: TeamCardProps) {
       {/* Fanbase Notes Section */}
       <div>
         <h3 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">
-          {t('compare.fanbaseNotes')}
+          Fanbase Notes
         </h3>
         <p className="text-sm text-gray-600 leading-relaxed">
           {team.fanbase_notes}

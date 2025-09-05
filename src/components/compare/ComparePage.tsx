@@ -1,7 +1,6 @@
 'use client';
 
 import { useGetComparisonQuery } from '../../lib/api/compareApi';
-import { useTranslation } from '../../lib/i18n/useTranslation';
 import TeamCard from './TeamCard';
 import CompareStats from './CompareStats';
 import FreshnessBadge from './FreshnessBadge';
@@ -16,7 +15,6 @@ interface ComparePageProps {
  * Handles data loading, loading states, and renders the comparison UI
  */
 export default function ComparePage({ teamA = 'st-george', teamB = 'bunna' }: ComparePageProps) {
-  const { t } = useTranslation();
   
   const {
     data: comparison,
@@ -30,7 +28,7 @@ export default function ComparePage({ teamA = 'st-george', teamB = 'bunna' }: Co
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600">{t('compare.loading')}</p>
+            <p className="text-gray-600">Loading comparison...</p>
           </div>
         </div>
       </div>
@@ -43,7 +41,7 @@ export default function ComparePage({ teamA = 'st-george', teamB = 'bunna' }: Co
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="text-red-500 text-lg mb-4">⚠️</div>
-            <p className="text-gray-600">{t('compare.error')}</p>
+            <p className="text-gray-600">Failed to load comparison data</p>
           </div>
         </div>
       </div>
@@ -58,12 +56,12 @@ export default function ComparePage({ teamA = 'st-george', teamB = 'bunna' }: Co
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">
-            {t('compare.title')}
+            Team Comparison
           </h1>
           <div className="flex items-center justify-center gap-4 mb-6">
             <span className="text-xl font-semibold text-gray-800">{team_a.name}</span>
             <div className="bg-green-600 text-white px-4 py-2 rounded-lg font-bold">
-              {t('compare.vs')}
+              VS
             </div>
             <span className="text-xl font-semibold text-gray-800">{team_b.name}</span>
           </div>
