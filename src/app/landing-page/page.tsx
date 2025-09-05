@@ -14,7 +14,6 @@ import {
 export default function EthiopianFootballPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
       <section
         id="hero"
         className="relative h-screen flex items-center justify-center overflow-hidden"

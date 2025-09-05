@@ -1,4 +1,3 @@
-// components/Navbar.tsx
 "use client";
 
 import Link from "next/link";
@@ -6,7 +5,7 @@ import { Globe, User } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { name: "Home", href: "/" },
+  { name: "Home", href: "/landing-page" },
   { name: "Live Hub", href: "/liveScores" },
   { name: "Compare", href: "/compare" },
   { name: "News", href: "/news" },
