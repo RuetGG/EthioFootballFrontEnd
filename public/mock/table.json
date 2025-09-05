@@ -1,0 +1,82 @@
+{
+  "leagues": [
+    {
+      "league": "Ethiopian Premier League",
+      "standings": [
+        {
+          "position": 1,
+          "team": "Saint George",
+          "points": 45,
+          "match_played": 20,
+          "wins": 14,
+          "lose": 2,
+          "draw": 4,
+          "GD": 25
+        },
+        {
+          "position": 2,
+          "team": "Ethiopian Coffee",
+          "points": 40,
+          "match_played": 20,
+          "wins": 12,
+          "lose": 3,
+          "draw": 5,
+          "GD": 18
+        },
+        {
+          "position": 3,
+          "team": "Bahir Dar City",
+          "points": 36,
+          "match_played": 20,
+          "wins": 10,
+          "lose": 4,
+          "draw": 6,
+          "GD": 10
+        }
+      ],
+      "freshness": {
+        "source": "Mock API",
+        "retrieved": "2025-09-05T10:00:00Z"
+      }
+    },
+    {
+      "league": "English Premier League",
+      "standings": [
+        {
+          "position": 1,
+          "team": "Manchester City",
+          "points": 55,
+          "match_played": 22,
+          "wins": 17,
+          "lose": 2,
+          "draw": 3,
+          "GD": 30
+        },
+        {
+          "position": 2,
+          "team": "Liverpool",
+          "points": 52,
+          "match_played": 22,
+          "wins": 16,
+          "lose": 2,
+          "draw": 4,
+          "GD": 28
+        },
+        {
+          "position": 3,
+          "team": "Arsenal",
+          "points": 49,
+          "match_played": 22,
+          "wins": 15,
+          "lose": 3,
+          "draw": 4,
+          "GD": 22
+        }
+      ],
+      "freshness": {
+        "source": "Mock API",
+        "retrieved": "2025-09-05T10:00:00Z"
+      }
+    }
+  ]
+}
