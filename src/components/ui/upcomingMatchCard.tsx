@@ -1,21 +1,34 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-interface MatchCardProps {
+interface UpcomingMatchCardProps {
   league: string;
   homeTeam: string;
   awayTeam: string;
-  score: string;
-  isLive: boolean;
+  kickoff: string | Date;
+  homeLogo?: string;
+  awayLogo?: string;
 }
 
-const MatchCard: React.FC<MatchCardProps> = ({
+const UpcomingMatchCardResponsive: React.FC<UpcomingMatchCardProps> = ({
   league,
   homeTeam,
   awayTeam,
-  score,
-  isLive
+  kickoff,
+  homeLogo,
+  awayLogo,
 }) => {
+  const date = new Date(kickoff);
+  const schedule = isNaN(date.getTime())
+    ? "TBD"
+    : new Intl.DateTimeFormat(undefined, {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      }).format(date);
+
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
 
@@ -43,36 +56,42 @@ const MatchCard: React.FC<MatchCardProps> = ({
       }}
     >
       <div className="flex justify-between items-center mb-4 relative z-10">
-        <span className="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+        <span className="text-s font-medium text-gray-600 px-3 py-1 rounded-full">
           {league}
         </span>
-        <span className={`text-xs font-medium px-3 py-1 rounded-full ${isLive ? 'bg-red-500 text-white' : 'bg-gray-600 text-white'}`}>
-          {isLive ? "LIVE" : "FT"}
-        </span>
+        <time className="text-s text-gray-600 wrap">
+          {schedule}
+        </time>
       </div>
 
       <div className="flex items-center justify-between relative z-10">
         <div className="flex flex-col items-center w-5/12">
-          <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center mb-2">
-            <span className="text-xs font-bold text-gray-500">HOME</span>
-          </div>
+          {homeLogo ? (
+            <img src={homeLogo} alt={homeTeam} className="h-12 w-12 object-contain mb-2" />
+          ) : (
+            <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center mb-2">
+              <span className="text-xs font-bold text-gray-500">HOME</span>
+            </div>
+          )}
           <span className="font-semibold text-base text-gray-800 text-center truncate w-full">
             {homeTeam}
           </span>
         </div>
 
-        {/* Score display */}
         <div className="flex flex-col items-center w-2/12">
-          <span className="font-bold text-gray-800 text-xl mb-1">
-            {score}
-          </span>
-          <div className="w-full h-px bg-gray-200"></div>
+          <div className="font-bold text-white px-3 py-1.5 rounded bg-gradient-to-r from-green-500 to-green-600 shadow-sm text-xs">
+            VS
+          </div>
         </div>
 
         <div className="flex flex-col items-center w-5/12">
-          <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center mb-2">
-            <span className="text-xs font-bold text-gray-500">AWAY</span>
-          </div>
+          {awayLogo ? (
+            <img src={awayLogo} alt={awayTeam} className="h-12 w-12 object-contain mb-2" />
+          ) : (
+            <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center mb-2">
+              <span className="text-xs font-bold text-gray-500">AWAY</span>
+            </div>
+          )}
           <span className="font-semibold text-base text-gray-800 text-center truncate w-full">
             {awayTeam}
           </span>
@@ -82,4 +101,4 @@ const MatchCard: React.FC<MatchCardProps> = ({
   );
 };
 
-export default MatchCard;
+export default UpcomingMatchCardResponsive;

@@ -9,8 +9,8 @@ const liveScores = () => {
   ];
 
   return (
-    <div className="m-5 flex flex-col items-center">
-  <LiveHubRoutings />
+    <div className="m-5 flex flex-col items-center ">
+  <LiveHubRoutings currentPath="/liveScores" />
 
   <div className="flex justify-between items-center mt-6 mb-4 w-full max-w-[700px] px-2">
     <h1 className="text-xl ">Today's Matches</h1>
