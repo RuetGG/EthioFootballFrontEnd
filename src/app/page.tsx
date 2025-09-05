@@ -1,3 +1,5 @@
+import EthiopianFootballPage from "./landing-page/page";
+
 export default function HomePage() {
-  return <div>home page</div>;
+  return <EthiopianFootballPage />;
 }
