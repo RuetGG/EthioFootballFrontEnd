@@ -5,7 +5,7 @@ export default function Sidebar() {
       <ul className="flex flex-col space-y-4 text-gray-700">
         <li>
           <a
-            href="/live-scores"
+            href="/liveScores"
             className="flex items-center gap-2 px-3 py-2 rounded-lg hover:text-green-600 hover:bg-green-100 transition-colors duration-200"
           >
             <span className="text-xl"></span> Live Scores
@@ -21,7 +21,7 @@ export default function Sidebar() {
         </li>
         <li>
           <a
-            href="/latest-views"
+            href="/news"
             className="flex items-center gap-2 px-3 py-2 rounded-lg hover:text-green-600 hover:bg-green-100 transition-colors duration-200"
           >
             <span className="text-xl"></span> Latest Views
@@ -29,7 +29,7 @@ export default function Sidebar() {
         </li>
         <li>
           <a
-            href="/library"
+            href="/Offline"
             className="flex items-center gap-2 px-3 py-2 rounded-lg hover:text-green-600 hover:bg-green-100 transition-colors duration-200"
           >
             <span className="text-xl"></span> Offline Library

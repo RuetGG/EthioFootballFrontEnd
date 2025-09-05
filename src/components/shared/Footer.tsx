@@ -1,4 +1,3 @@
-// components/Footer.tsx
 import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
 import Link from "next/link";
 
@@ -6,7 +5,6 @@ export default function Footer() {
   return (
     <footer className="bg-[#224F38] text-white px-6 py-10">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Quick Links */}
         <div>
           <h3 className="font-semibold mb-4">Quick Links</h3>
           <div className="flex flex-wrap gap-6 text-sm">
@@ -34,7 +32,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Divider */}
       <hr className="border-gray-500 my-6" />
 
       {/* Bottom Section */}

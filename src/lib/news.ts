@@ -43,8 +43,8 @@ const DEFAULT_NEWS: NewsItem[] = [
 
 export type FetchNewsOptions = {
   signal?: AbortSignal;
-  leagues?: string; // e.g., "ETH|EPL"
-  baseUrl?: string; // optional override
+  leagues?: string;
+  baseUrl?: string;
 };
 
 function mapApiItemToNewsItem(api: any): NewsItem {
@@ -67,14 +67,12 @@ export async function fetchNews(opts: FetchNewsOptions = {}): Promise<NewsRespon
 
   try {
     if (!endpoint || endpoint.endsWith("/news?league=")) {
-      // No configured API, fall back to defaults
       return { items: DEFAULT_NEWS };
     }
 
     const res = await fetch(endpoint, {
       method: "GET",
       signal,
-      // Cache for 15 minutes on the server
       next: { revalidate: 900 },
       headers: {
         "Content-Type": "application/json",
