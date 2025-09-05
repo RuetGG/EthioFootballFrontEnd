@@ -13,20 +13,17 @@ export default function NotFoundPage() {
 				className="mb-6"
 			/>
 
-			{/* Title */}
 			<h1 className="text-2xl font-bold mb-2">Oops! Page Not Found</h1>
 
-			{/* Description */}
 			<p className="text-gray-600 max-w-md mb-6">
 				It looks like the page you were looking for has taken a detour. Don’t
 				worry, you can always find your way back to the action!
 			</p>
 
-			{/* Buttons */}
 			<div className="flex flex-wrap justify-center gap-3">
 				<Link
 					href="/"
-					className="px-6 py-2 rounded-lg font-medium bg-blue-900 text-white hover:bg-blue-800"
+					className="px-6 py-2 rounded-lg font-medium bg-green-900 text-white hover:bg-blue-800"
 				>
 					Home
 				</Link>
