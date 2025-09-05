@@ -1,9 +1,5 @@
-import React from 'react'
+import ComparePage from '../../components/compare/ComparePage';
 
-const Compare = () => {
-  return (
-    <div>Compare Page</div>
-  )
+export default function Compare() {
+  return <ComparePage />;
 }
-
-export default Compare
