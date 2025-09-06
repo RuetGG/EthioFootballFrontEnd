@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image"; // ✅ FIX: import Image
+import Image from "next/image";
 
 import Sidebar from "@/src/components/Sidebar";
 import ChatBox from "@/src/components/ChatBox";
 import EthiopianFootballCard from "@/src/components/EthiopianFootballCard";
+
+import { mockChatResponses } from "@/public/mock/chatResponse";
 
 export default function MainContent() {
   const [message, setMessage] = useState("");
@@ -21,14 +23,25 @@ export default function MainContent() {
     setMessage("");
 
     try {
-      const res = await fetch("/api/chat", {
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: finalMessage }),
-      });
+      if (process.env.NEXT_PUBLIC_API_URL) {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/intent`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userPrompt: finalMessage }),
+        });
+        if (!res.ok) throw new Error(`Server responded with ${res.status}`);
+        const data = await res.json();
+        const botResponse = data.markdown || "No response from server.";
+        setChat((prev) => [...prev, { sender: "bot", text: botResponse }]);
+      } else {
+        const botResponse =
+          mockChatResponses[finalMessage] ||
+          "I don't have a response for that yet.";
 
-      const data = await res.json();
-      const botResponse = data.response || "No response from server.";
-      setChat((prev) => [...prev, { sender: "bot", text: botResponse }]);
+        setTimeout(() => {
+          setChat((prev) => [...prev, { sender: "bot", text: botResponse }]);
+        }, 500); 
+      }
     } catch (error) {
       console.error(error);
       setChat((prev) => [
@@ -39,7 +52,7 @@ export default function MainContent() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row p-4 lg:p-8 gap-6 lg:gap-8 max-w-7xl w-full mx-auto h-[calc(70vh-70px)]">
+    <div className="flex flex-col lg:flex-row p-4 lg:p-8 gap-6 lg:gap-8 max-w-7xl w-full mx-auto h-[calc(70vh-70px)] mb-50">
       <div className="flex flex-col flex-1 gap-6">
         {chat.length === 0 ? (
           <EthiopianFootballCard handleSend={handleSend} />
