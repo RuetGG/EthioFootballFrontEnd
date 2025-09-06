@@ -24,7 +24,7 @@ export default function MainContent() {
 
     try {
       if (process.env.NEXT_PUBLIC_API_URL) {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/intent`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/intent/parser`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ userPrompt: finalMessage }),

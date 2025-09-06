@@ -1,7 +1,7 @@
-'use client'
+'use client';
 import LiveHubRoutings from '@/src/components/ui/LiveHubRoutings';
 import React from 'react';
-import MatchCard from '@/src/components/ui/upcomingMatchCard';
+import UpcomingMatchCardResponsive from '@/src/components/ui/upcomingMatchCard';
 import { useGetFixturesQuery } from '../../lib/api/fixtureApi'; 
 
 const Fixture = () => {
@@ -19,13 +19,15 @@ const Fixture = () => {
       </div>
 
       <div className="flex flex-col gap-3 w-full max-w-[700px]">
-        {upcomingMatches?.fixtures.map((match: any, index: number) => (
-          <MatchCard
+        {upcomingMatches?.fixtures.map((match, index) => (
+          <UpcomingMatchCardResponsive
             key={index}
             league={match.league}
             homeTeam={match.home_team}
             awayTeam={match.away_team}
             kickoff={match.kickoff}
+            homeLogo={match.home_logo}
+            awayLogo={match.away_logo}
           />
         ))}
       </div>

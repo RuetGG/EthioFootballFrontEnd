@@ -1,43 +1,51 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { apiClient } from '../apiClient';
+import { apiClient } from "../apiClient";
+import liveScoresJSON from "@/public/mock/livescore.json";
 
-type Score = {
-  id: string;
-  home_team: string;
-  away_team: string;
-  home_team_score: string;
-  away_team_score: string;
-  home_team_logo?: string;
-  away_team_logo?: string;
+export type TeamInfo = { name: string; logo: string };
+
+export type LiveScoreFixture = {
+  fixture_id: number;
+  date: string;
+  venue: string;
   league: string;
-  status: string;
+  round: string;
+  home_team: TeamInfo;
+  away_team: TeamInfo;
+  goals: { home: number; away: number };
+  score: any;
+  status: { long: string; short: string; Elapsed: number; extra: number };
 };
 
-type LiveScoreResponse = {
-  score: Score[];
-  freshness: {
-    source: string;
-    retrieved: string;
-  };
-};
+export type LiveScoreResponse = { result: LiveScoreFixture[] };
 
-export const livescoreApi = createApi({
-  reducerPath: "livescoreApi",
+export const liveScoreApi = createApi({
+  reducerPath: "liveScoreApi",
   baseQuery: apiClient,
-  tagTypes: ["LiveScore"],
+  tagTypes: ["LiveScores"],
   endpoints: (builder) => ({
-    getLiveScore: builder.query<LiveScoreResponse, { league?: string; team?: string; from?: string; to?: string } | void>({
-  query: (params) => {
-    if (!process.env.NEXT_PUBLIC_API_URL) {
-      return '/livescore';
-    }
-   
-
-    return `/livescore`;
-  },
-})
-
+    getLiveScores: builder.query<LiveScoreResponse, { league?: string } | void>(
+      {
+        query: (params) => {
+          if (!process.env.NEXT_PUBLIC_API_URL) return "/livescore";
+          const url = `/live${
+            params?.league ? `?league=${params.league}` : ""
+          }`;
+          return url;
+        },
+        transformResponse: (response: any) => {
+          if (!process.env.NEXT_PUBLIC_API_URL) {
+            return {
+              result: liveScoresJSON.result?.length
+                ? liveScoresJSON.result
+                : null,
+            };
+          }
+          return { result: response.result ?? null };
+        },
+      }
+    ),
   }),
 });
 
-export const { useGetLiveScoreQuery } = livescoreApi;
+export const { useGetLiveScoresQuery } = liveScoreApi;

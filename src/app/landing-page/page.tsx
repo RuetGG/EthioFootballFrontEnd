@@ -14,7 +14,6 @@ import {
 export default function EthiopianFootballPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
       <section
         id="hero"
         className="relative h-screen flex items-center justify-center overflow-hidden"
@@ -28,7 +27,7 @@ export default function EthiopianFootballPage() {
 
         <div className="absolute inset-0 bg-black/40 z-10"></div>
 
-        {/* <header className="fixed top-0 left-0 w-full z-50 bg-green-900 px-8 py-4 flex items-center justify-between shadow-md">
+        <header className="fixed top-0 left-0 w-full z-50 bg-green-900 px-8 py-4 flex items-center justify-between shadow-md">
           <div className="flex items-center space-x-20">
         
             <Link href="/" className="text-2xl  text-white">
@@ -60,7 +59,7 @@ export default function EthiopianFootballPage() {
             <Globe className="h-5 w-5" />
             ENG
           </Button>
-        </header> */}
+        </header>
 
         <div className="absolute bottom-0 left-0 z-10 text-white p-8 md:p-12 max-w-2xl">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-amber-400 leading-tight">
