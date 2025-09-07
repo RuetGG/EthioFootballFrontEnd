@@ -1,45 +1,17 @@
-import "server-only";
+// import "server-only";
 
-import { NewsItem, NewsResponse } from "@/src/types/news";
-
-const DEFAULT_NEWS: NewsItem[] = [
-  {
-    id: "1",
-    imageUrl: "/news1.jpg",
-    status: "Live",
-    category: "Premier League",
-    title: "Arsenal Extends Lead at Top of Premier League",
-    publishedAt: "2024-01-01T10:00:00Z",
-    sourceName: "BBC Sport",
-    description:
-      "Bukayo Saka’s brilliant double helped Arsenal secure a crucial 3-1 victory over Chelsea at Emirates Stadium. The Gunners now sit 5 points clear at the top.",
-    url: "https://www.bbc.co.uk/sport",
-  },
-  {
-    id: "2",
-    imageUrl: "/news2.jpg",
-    status: "Updated",
-    category: "Ethiopian Football",
-    title: "Ethiopia Secures Win in CAF Qualifiers",
-    publishedAt: "2024-01-01T08:00:00Z",
-    sourceName: "Capital Ethiopia",
-    description:
-      "The Ethiopian national team secured a thrilling 2-1 win in the CAF qualifiers, keeping their hopes alive for the tournament.",
-    url: "https://www.capitalethiopia.com/",
-  },
-  {
-    id: "3",
-    imageUrl: "/news3.jpg",
-    status: "Curated",
-    category: "International",
-    title: "UEFA Champions League Heats Up",
-    publishedAt: "2023-12-31T10:00:00Z",
-    sourceName: "Sky Sports",
-    description:
-      "The knockout stages of the Champions League continue to deliver surprises as underdogs rise against Europe’s football giants.",
-    url: "https://www.skysports.com/",
-  },
-];
+const DEFAULT_NEWS: Record<string, string[]> = {
+  standings: [
+    "Currently playing Live: Saint George vs Ethiopian Coffee on 07 Sep 2025 with score 2 to 1 | Status: Live - 67', Who will win?",
+  ],
+  futureMatches: [
+    "Currently playing Live: Adama City vs Fasil Kenema on 07 Sep 2025 with score 0 to 0 | Status: Live - HT, Who will win?",
+  ],
+  pastMatches: [
+    "Currently playing Live: Sidama Bunna vs Hawassa City on 07 Sep 2025 with score 1 to 3 | Status: Live - 80', Who will win?",
+  ],
+  liveScores: [],
+};
 
 export type FetchNewsOptions = {
   signal?: AbortSignal;
@@ -47,59 +19,72 @@ export type FetchNewsOptions = {
   baseUrl?: string; // optional override
 };
 
-function mapApiItemToNewsItem(api: any): NewsItem {
-  return {
-    id: String(api.id),
-    title: api.title ?? "",
-    description: api.snippet ?? api.content ?? "",
-    imageUrl: api.image_url ?? undefined,
-    status: undefined,
-    category: undefined,
-    publishedAt: api.published_at ?? undefined,
-    sourceName: api.source ?? undefined,
-    url: api.url ?? undefined,
-  };
-}
-
-export async function fetchNews(opts: FetchNewsOptions = {}): Promise<NewsResponse> {
+/**
+ * Fetches football news from multiple endpoints.
+ * Returns an object keyed by endpoint name with array of news strings.
+ */
+export async function fetchNews(
+  opts: FetchNewsOptions = {}
+): Promise<Record<string, string[]>> {
   const { signal, leagues = "ETH|EPL", baseUrl } = opts;
-  const endpoint = `${baseUrl ?? process.env.NEXT_PUBLIC_API_BASE ?? ""}/news?league=${encodeURIComponent(leagues)}`;
+
+  const apiBase = baseUrl ?? process.env.NEXT_PUBLIC_API_BASE;
+  if (!apiBase) {
+    console.warn("No API base URL configured. Using default news.");
+    return DEFAULT_NEWS;
+  }
+
+  const endpoints = [
+    "/standings",
+    "/futureMatches",
+    "/pastMatches",
+    "/liveScores",
+  ];
+  const allNews: Record<string, string[]> = {};
 
   try {
-    if (!endpoint || endpoint.endsWith("/news?league=")) {
-      // No configured API, fall back to defaults
-      return { items: DEFAULT_NEWS };
+    for (const ep of endpoints) {
+      const url = `${apiBase}/news${ep}`;
+      console.log("Fetching news from:", url);
+
+      const res = await fetch(url, {
+        method: "GET",
+        signal,
+        next: { revalidate: 900 }, // cache 15 minutes
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!res.ok) {
+        console.error(`Failed to fetch ${ep}: ${res.status}`);
+        continue;
+      }
+
+      const raw = await res.json();
+      console.log(`Raw response for ${ep}:`, raw);
+
+      // Normalize: allow raw to be array, or { items: [] }, or { message: [] }, etc.
+      const items: string[] = Array.isArray(raw)
+        ? raw
+        : Array.isArray(raw?.items)
+        ? raw.items
+        : Array.isArray(raw?.message)
+        ? raw.message
+        : Array.isArray(raw?.news)
+        ? raw.news
+        : typeof raw?.message === "string"
+        ? [raw.message]
+        : [];
+
+      const key = ep.replace("/", ""); 
+      allNews[key] = items.filter((x): x is string => typeof x === "string");
     }
 
-    const res = await fetch(endpoint, {
-      method: "GET",
-      signal,
-      // Cache for 15 minutes on the server
-      next: { revalidate: 900 },
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    console.log("All fetched news:", allNews);
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch news: ${res.status}`);
-    }
-
-    const raw = await res.json();
-    const array = Array.isArray(raw) ? raw : Array.isArray(raw?.items) ? raw.items : [raw];
-    const items = array.map(mapApiItemToNewsItem);
-    return { items };
-  } catch (_error) {
-    return { items: DEFAULT_NEWS };
+    // If we didn’t fetch anything, fall back to default
+    return Object.keys(allNews).length > 0 ? allNews : DEFAULT_NEWS;
+  } catch (error) {
+    console.error("Error fetching news:", error);
+    return DEFAULT_NEWS;
   }
 }
-
-export function extractCategories(items: NewsItem[]): string[] {
-  const set = new Set<string>(["All News"]);
-  for (const item of items) {
-    if (item.category) set.add(item.category);
-  }
-  return Array.from(set);
-}
-
-
