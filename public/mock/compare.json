@@ -1,21 +1,23 @@
 {
   "comparison_data": {
     "team_a": {
-      "name": "St. George",
-      "honors": ["31x Premier League", "12x Ethiopian Cup"],
-      "recent_form": ["W","W","D","W","L"],
-      "notable_players": ["Player A","Player B"],
-      "fanbase_notes": "Reportedly the largest and most passionate fanbase in the country."
+      "name": "St. George FC",
+      "matches_played": 30,
+      "wins": 18,
+      "draws": 10,
+      "losses": 2,
+      "goals_for": 51,
+      "goals_against": 21
     },
   
     "team_b": {
-      "name": "Ethiopia Bunna",
-      "honors": ["2x Premier League", "5x Ethiopian Cup"],
-      "recent_form": ["L","D","D","W","W"],
-      "notable_players": ["Player C","Player D"],
-      "fanbase_notes": "Known for their vibrant and vocal supporters, especially in Addis Ababa."
+      "name": "Ethiopia Bunna FC",
+      "matches_played": 30,
+      "wins": 10,
+      "draws": 13,
+      "losses": 7,
+      "goals_for": 38,
+      "goals_against": 32
     }
-  },
-  "source": "Curated Data",
-  "freshness": "2025-09-01T12:00:00Z"
+  }
 }

@@ -11,18 +11,47 @@ export default function CompareStats({ teamA, teamB }: CompareStatsProps) {
     return form.filter(result => result === 'W').length;
   };
 
-  const getHonorsCount = (honors: string[]) => {
-    return honors.length;
+  const getWinPercentage = (wins: number, matches: number) => {
+    return matches > 0 ? Math.round((wins / matches) * 100) : 0;
+  };
+
+  const getGoalDifference = (goalsFor: number, goalsAgainst: number) => {
+    return goalsFor - goalsAgainst;
   };
 
   const stats = [
     {
-      label: 'Total Honors',
-      teamA: getHonorsCount(teamA.honors),
-      teamB: getHonorsCount(teamB.honors),
+      label: 'Matches Played',
+      teamA: teamA.matches_played,
+      teamB: teamB.matches_played,
     },
     {
-      label: 'Recent Wins',
+      label: 'Wins',
+      teamA: teamA.wins,
+      teamB: teamB.wins,
+    },
+    {
+      label: 'Win Rate',
+      teamA: `${getWinPercentage(teamA.wins, teamA.matches_played)}%`,
+      teamB: `${getWinPercentage(teamB.wins, teamB.matches_played)}%`,
+    },
+    {
+      label: 'Goals For',
+      teamA: teamA.goals_for,
+      teamB: teamB.goals_for,
+    },
+    {
+      label: 'Goals Against',
+      teamA: teamA.goals_against,
+      teamB: teamB.goals_against,
+    },
+    {
+      label: 'Goal Difference',
+      teamA: getGoalDifference(teamA.goals_for, teamA.goals_against),
+      teamB: getGoalDifference(teamB.goals_for, teamB.goals_against),
+    },
+    {
+      label: 'Recent Form Wins',
       teamA: getWinsCount(teamA.recent_form),
       teamB: getWinsCount(teamB.recent_form),
     },
@@ -30,21 +59,23 @@ export default function CompareStats({ teamA, teamB }: CompareStatsProps) {
   console.log(teamA.recent_form, teamB.recent_form)
 
   return (
-    <div className="bg-gray-50 rounded-lg p-4 mb-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">
-        Head-to-Head Stats
+    <div className="bg-white rounded-lg border border-gray-200 p-6 mb-8">
+      <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">
+        Season Statistics Comparison
       </h3>
-      <div className="space-y-3">
+      <div className="space-y-4">
         {stats.map((stat, index) => (
-          <div key={index} className="flex items-center justify-between">
+          <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-b-0">
             <div className="text-center flex-1">
-              <div className="text-2xl font-bold text-blue-600">{stat.teamA}</div>
+              <div className="text-lg font-semibold text-blue-600">{stat.teamA}</div>
+            </div>
+            <div className="text-center flex-1 px-4">
+              <div className="text-sm font-medium text-gray-700 bg-gray-50 px-3 py-1 rounded-full">
+                {stat.label}
+              </div>
             </div>
             <div className="text-center flex-1">
-              <div className="text-sm font-medium text-gray-600">{stat.label}</div>
-            </div>
-            <div className="text-center flex-1">
-              <div className="text-2xl font-bold text-blue-600">{stat.teamB}</div>
+              <div className="text-lg font-semibold text-blue-600">{stat.teamB}</div>
             </div>
           </div>
         ))}
