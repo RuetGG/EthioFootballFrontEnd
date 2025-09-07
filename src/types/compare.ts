@@ -18,7 +18,7 @@ export interface TeamComparison {
     team_b: TeamData;
   };
   source: string;
-  freshness: string; // ISO date string
+  freshness: string; 
 }
 
 export interface CompareState {

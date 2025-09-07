@@ -1,4 +1,5 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
 
 interface ChatMessage {
   sender: "user" | "bot";
@@ -27,7 +28,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ chat }) => {
                   : "bg-gray-100 text-gray-800 shadow-sm"
               }`}
             >
-              {msg.text}
+              <ReactMarkdown>{msg.text}</ReactMarkdown>
             </div>
           </div>
         ))}

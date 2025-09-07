@@ -10,7 +10,6 @@ const navItems = [
   { name: "Compare", href: "/compare" },
   { name: "News", href: "/news" },
   { name: "Offline", href: "/Offline" },
-  // { name: "My Clubs", href: "/my-clubs" },
 ];
 const homeItems = [
   { name: "Home Page", href: "#hero" },
@@ -38,7 +37,9 @@ function NavBar() {
             <button
               type="button"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className={`${
+                isHome ? "bg-gray-100" : "None"
+              } relative inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500`}
             >
               <span className="sr-only">Toggle main menu</span>
               {mobileOpen ? (
@@ -94,7 +95,7 @@ function NavBar() {
                         href={item.href}
                         className={`px-2 text-sm font-medium transition-colors duration-200
                          
-                             text-white hover:text-green-700
+                             text-white hover:text-amber-400
                         `}
                       >
                         {item.name}
@@ -145,7 +146,7 @@ function NavBar() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`block rounded-md px-3 py-2 text-base font-medium  duration-200 text-white hover:text-[#224F38] hover:bg-white
+                    className={`block rounded-md px-3 py-2 text-base font-medium  duration-200 text-white hover:hover:text-amber-400 hover:bg-white
                       ]"
                     }`}
                   >

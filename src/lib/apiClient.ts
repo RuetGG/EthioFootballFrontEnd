@@ -1,22 +1,29 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query";
 
-const backendBaseQuery = fetchBaseQuery({
-  baseUrl: process.env.NEXT_PUBLIC_API_URL,
-});
+type ApiClientOptions = {
+  mockFile?: string; // e.g., "fixtures" -> loads /mock/fixtures.json
+};
 
-export const apiClient: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
-  args,
-  api,
-  extraOptions
-) => {
-  if (process.env.NEXT_PUBLIC_API_URL) {
-    return backendBaseQuery(args, api, extraOptions);
-  }
+export const createApiClient = (options: ApiClientOptions = {}) => {
+  const { mockFile } = options;
+  const hasRealApi = Boolean(process.env.NEXT_PUBLIC_API_URL);
 
-  let url = typeof args === "string" ? args : args.url;
-  return fetch(`/mock${url}.json`)
-    .then((res) => res.json())
-    .then((data) => ({ data }))
-    .catch((error) => ({ error }));
+  const rawBaseQuery = fetchBaseQuery({
+    baseUrl: process.env.NEXT_PUBLIC_API_URL || "", // real API base
+  });
+
+  return async (args: any, api: any, extraOptions: any) => {
+    if (!hasRealApi && mockFile) {
+      try {
+        const res = await fetch(`/mock/${mockFile}.json`);
+        if (!res.ok) throw new Error(`Failed to load mock file: ${mockFile}.json`);
+        const data = await res.json();
+        return { data };
+      } catch (error) {
+        return { error };
+      }
+    }
+
+    return rawBaseQuery(args, api, extraOptions);
+  };
 };

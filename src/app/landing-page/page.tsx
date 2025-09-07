@@ -14,7 +14,6 @@ import {
 export default function EthiopianFootballPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
       <section
         id="hero"
         className="relative h-screen flex items-center justify-center overflow-hidden"
@@ -35,11 +34,11 @@ export default function EthiopianFootballPage() {
           <p className="text-lg md:text-xl mb-6 text-gray-100">
             Join us in celebrating the passion and excitement of Ethiopian
             football. Stay updated with the latest news, match results, and
-            player stories.
+            team stories.
           </p>
           <div className="flex gap-4">
             <Button className="bg-white text-gray-900 px-6 py-3 font-semibold rounded-none">
-              <Link href="/">Join</Link>
+              <Link href="/chat">Join</Link>
             </Button>
             <Button
               variant="outline"
@@ -69,7 +68,7 @@ export default function EthiopianFootballPage() {
               <p className="text-lg text-gray-600 leading-relaxed">
                 Stay informed with the latest updates in Ethiopian football. Our
                 platform brings you real-time news, match scores, and in-depth
-                player profiles. Join a community that celebrates the passion
+                team profiles. Join a community that celebrates the passion
                 and culture of the sport.
               </p>
             </div>
@@ -168,7 +167,7 @@ export default function EthiopianFootballPage() {
 
           <div className="text-center mt-12">
             <Button className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-none">
-              <Link href="/">Learn More →</Link>
+              <Link href="/chat">Learn More →</Link>
             </Button>
           </div>
         </div>
