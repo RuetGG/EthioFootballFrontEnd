@@ -20,12 +20,10 @@ export default function ComparePage() {
     e.preventDefault();
 
 
-    // Validate inputs
     if (!teamA.trim() || !teamB.trim()) {
       setErrorMessage('Both team names are required.');
       return;
     }
-    console.log(teamA, teamB)
 
     setErrorMessage('');
     setSubmittedTeams({ teamA: teamA.trim(), teamB: teamB.trim() });

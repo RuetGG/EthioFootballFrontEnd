@@ -3,11 +3,8 @@ import type { TeamData } from '../../types/compare';
 interface CompareStatsProps {
   teamA: TeamData;
   teamB: TeamData;
+}
 
-/**
- * Component to display head-to-head comparison statistics
- * Shows honors count and recent wins comparison
- */
 export default function CompareStats({ teamA, teamB }: CompareStatsProps) {
 
   const getWinsCount = (form: string[]) => {
