@@ -10,7 +10,6 @@ interface MatchCardProps {
   homeLogo?: string;
   awayLogo?: string;
 }
-
 const MatchCard: React.FC<MatchCardProps> = ({
   league,
   homeTeam,
@@ -23,6 +22,7 @@ const MatchCard: React.FC<MatchCardProps> = ({
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
 
+  console.log(homeTeam, league)
   return (
     <div
       onMouseEnter={() => setIsHovered(true)}

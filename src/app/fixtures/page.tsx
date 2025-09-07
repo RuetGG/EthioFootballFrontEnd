@@ -1,47 +1,75 @@
 'use client';
 import React from 'react';
 import LiveHubRoutings from '@/src/components/ui/LiveHubRoutings';
-import MatchCard from '@/src/components/ui/upcomingMatchCard';
-import { useGetFixturesQuery } from '../../lib/api/fixtureApi';
-import type { Fixture } from '../../lib/api/fixtureApi';
+import UpcomingMatchCard from '@/src/components/ui/upcomingMatchCard';
+import MatchCard from '@/src/components/ui/todaysMatchCard';
+import { useGetFixturesQuery, useGetPreviousFixturesQuery } from '../../lib/api/fixtureApi';
+import type { Fixture, PreviousFixture } from '../../lib/api/fixtureApi';
 
-const Fixture = () => {
-  const { data: upcomingMatches, isLoading, error } = useGetFixturesQuery({ league: 'ETH' });
+const FixturePage = () => {
+  const { data: upcomingMatches, isLoading: upcomingLoading, error: upcomingError } = useGetFixturesQuery({ league: 'ETH' });
 
-  if (isLoading) return <p className="text-center mt-6">Loading fixtures...</p>;
+  const { data: previousData, isLoading: previousLoading, error: previousError } = useGetPreviousFixturesQuery({
+    league: 'ETH',
+    round: 1,
+    season: 2022,
+  });
 
-  if (!upcomingMatches || upcomingMatches.fixtures.length === 0) {
+  if (upcomingLoading || previousLoading) return <p className="text-center mt-6">Loading fixtures...</p>;
+
+  // If upcoming matches exist, show them
+  if (upcomingMatches && upcomingMatches.fixtures.length > 0) {
     return (
-      <div>
+      <div className="m-5 flex flex-col items-center">
         <LiveHubRoutings currentPath="/fixtures" />
-        <p className="text-center mt-6 text-gray-700">No upcoming fixtures found.</p>
+        <h1 className="text-xl mt-6 mb-4">Upcoming Fixtures</h1>
+        <div className="flex flex-col gap-3 w-full max-w-[700px]">
+          {upcomingMatches.fixtures.map((match: Fixture, index: number) => (
+            <UpcomingMatchCard
+              key={index}
+              league={match.league}
+              homeTeam={match.home_team}
+              awayTeam={match.away_team}
+              kickoff={match.kickoff}
+            />
+          ))}
+        </div>
       </div>
     );
   }
 
-  if (error) return <p className="text-center mt-6 text-red-500">Failed to load fixtures</p>;
+  if (previousData && previousData.result.length > 0) {
+    const matches = previousData.result.map((match: PreviousFixture) => ({
+      league: match.league,
+      homeTeam: match.home_team.name,
+      awayTeam: match.away_team.name,
+      homeLogo: match.home_team.logo,
+      awayLogo: match.away_team.logo,
+      score: `${match.goals.home}-${match.goals.away}`,
+      isLive: false,
+    }));
 
-  return (
-    <div className="m-5 flex flex-col items-center">
-      <LiveHubRoutings currentPath="/fixtures" />
-
-      <div className="flex justify-between items-center mt-6 mb-4 w-full max-w-[700px] px-2">
-        <h1 className="text-xl font-semibold">Upcoming Fixtures</h1>
+    return (
+      <div className="m-5 flex flex-col items-center">
+        <LiveHubRoutings currentPath="/fixtures" />
+        <h1 className="text-xl mt-6 mb-4">Previous Matches</h1>
+        <div className="flex flex-col gap-3 w-full max-w-[700px]">
+          {matches.map((match, index) => (
+            <UpcomingMatchCard
+              key={index}
+              league={match.league}
+              homeTeam={match.homeTeam}
+              awayTeam={match.awayTeam}
+              homeLogo={match.homeLogo}
+              awayLogo={match.awayLogo}
+            />
+          ))}
+        </div>
       </div>
+    );
+  }
 
-      <div className="flex flex-col gap-3 w-full max-w-[700px]">
-        {upcomingMatches.fixtures.map((match: Fixture, index: number) => (
-          <MatchCard
-            key={index}
-            league={match.league}
-            homeTeam={match.home_team}
-            awayTeam={match.away_team}
-            kickoff={match.kickoff}
-          />
-        ))}
-      </div>
-    </div>
-  );
+  return <p className="text-center mt-6 text-gray-700">No fixtures available.</p>;
 };
 
-export default Fixture;
+export default FixturePage;
