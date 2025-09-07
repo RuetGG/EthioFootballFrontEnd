@@ -1,11 +1,24 @@
-/**
- * TypeScript interfaces for team comparison functionality
- */
 
 export type FormResult = "W" | "D" | "L";
 
-export interface TeamData {
+export interface TeamStats {
   name: string;
+  matches_played: number;
+  wins: number;
+  draws: number;
+  losses: number;
+  goals_for: number;
+  goals_against: number;
+}
+
+export interface ComparisonResponse {
+  comparison_data: {
+    team_a: TeamStats;
+    team_b: TeamStats;
+  };
+}
+
+export interface TeamData extends TeamStats {
   honors: string[];
   recent_form: FormResult[];
   notable_players: string[];
@@ -18,7 +31,7 @@ export interface TeamComparison {
     team_b: TeamData;
   };
   source: string;
-  freshness: string; // ISO date string
+  freshness: string;
 }
 
 export interface CompareState {
@@ -30,4 +43,10 @@ export interface CompareState {
 export interface CompareParams {
   teamA: string;
   teamB: string;
+  league?: string;
+}
+
+export interface TeamOption {
+  value: string;
+  label: string;
 }
