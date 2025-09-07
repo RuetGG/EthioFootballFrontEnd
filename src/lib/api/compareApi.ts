@@ -1,30 +1,31 @@
+// src/lib/api/compareApi.ts
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { apiClient } from "../apiClient";
+import { createApiClient } from "../apiClient"; // <-- use createApiClient
 import type { TeamComparison, CompareParams } from "../../types/compare";
-import mockComparison from "@/public/mock/compare.json"; // your mock JSON
+import mockComparison from "@/public/mock/compare.json";
+
+const baseQuery = createApiClient({ mockFile: "compare" });
 
 export const compareApi = createApi({
   reducerPath: "compareApi",
-  baseQuery: apiClient,
+  baseQuery, 
   tagTypes: ["Compare"],
   endpoints: (builder) => ({
     getComparison: builder.query<TeamComparison, CompareParams>({
-      query: ({ teamA, teamB }) => {
+      query: (params: CompareParams) => {
+        const { teamA, teamB } = params;
+
         if (!process.env.NEXT_PUBLIC_API_URL) {
-          return "/compare"; 
+          return "/compare"; // placeholder for mock
         }
 
         return {
-          url: "/intent/parser",
+          url: "/intent/parse",
           method: "POST",
-          body: { userPrompt: `compare ${teamA} ${teamB}` },
+          body: { text: `compare ${teamA} ${teamB}` },
         };
       },
-      transformResponse: (
-        response: any,
-        meta: any,
-        arg: CompareParams // type it here
-      ) => {
+      transformResponse: (response: any, meta, arg: CompareParams) => {
         if (!process.env.NEXT_PUBLIC_API_URL) {
           return {
             ...mockComparison,

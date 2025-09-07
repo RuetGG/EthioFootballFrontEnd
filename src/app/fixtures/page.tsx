@@ -11,7 +11,12 @@ const Fixture = () => {
   if (isLoading) return <p className="text-center mt-6">Loading fixtures...</p>;
 
   if (!upcomingMatches || upcomingMatches.fixtures.length === 0) {
-    return <p className="text-center mt-6 text-gray-700">No upcoming fixtures found.</p>;
+    return (
+      <div>
+        <LiveHubRoutings currentPath="/fixtures" />
+        <p className="text-center mt-6 text-gray-700">No upcoming fixtures found.</p>
+      </div>
+    );
   }
 
   if (error) return <p className="text-center mt-6 text-red-500">Failed to load fixtures</p>;

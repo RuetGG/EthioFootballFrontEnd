@@ -1,6 +1,6 @@
+// src/lib/api/liveScoreApi.ts
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { apiClient } from "../apiClient";
-import liveScoresJSON from "@/public/mock/livescore.json";
+import { createApiClient } from "../apiClient";
 
 export type TeamInfo = { name: string; logo: string };
 
@@ -19,32 +19,18 @@ export type LiveScoreFixture = {
 
 export type LiveScoreResponse = { result: LiveScoreFixture[] };
 
+// Create API with RTK Query
 export const liveScoreApi = createApi({
   reducerPath: "liveScoreApi",
-  baseQuery: apiClient,
+  baseQuery: createApiClient({ mockFile: "livescore" }),
   tagTypes: ["LiveScores"],
   endpoints: (builder) => ({
-    getLiveScores: builder.query<LiveScoreResponse, { league?: string } | void>(
-      {
-        query: (params) => {
-          if (!process.env.NEXT_PUBLIC_API_URL) return "/livescore";
-          const url = `/live${
-            params?.league ? `?league=${params.league}` : ""
-          }`;
-          return url;
-        },
-        transformResponse: (response: any) => {
-          if (!process.env.NEXT_PUBLIC_API_URL) {
-            return {
-              result: liveScoresJSON.result?.length
-                ? liveScoresJSON.result
-                : null,
-            };
-          }
-          return { result: response.result ?? null };
-        },
-      }
-    ),
+    getLiveScores: builder.query<LiveScoreResponse, { league?: string } | void>({
+      query: (params) => `/live${params?.league ? `?league=${params.league}` : ""}`,
+      transformResponse: (response: any) => ({
+        result: Array.isArray(response?.result) ? response.result : [],
+      }),
+    }),
   }),
 });
 

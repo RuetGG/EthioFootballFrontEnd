@@ -3,7 +3,6 @@ import type { TeamData } from '../../types/compare';
 interface CompareStatsProps {
   teamA: TeamData;
   teamB: TeamData;
-}
 
 /**
  * Component to display head-to-head comparison statistics
@@ -31,6 +30,7 @@ export default function CompareStats({ teamA, teamB }: CompareStatsProps) {
       teamB: getWinsCount(teamB.recent_form),
     },
   ];
+  console.log(teamA.recent_form, teamB.recent_form)
 
   return (
     <div className="bg-gray-50 rounded-lg p-4 mb-6">

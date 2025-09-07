@@ -68,7 +68,7 @@ export default function EthiopianFootballPage() {
           <p className="text-lg md:text-xl mb-6 text-gray-100">
             Join us in celebrating the passion and excitement of Ethiopian
             football. Stay updated with the latest news, match results, and
-            player stories.
+            team stories.
           </p>
           <div className="flex gap-4">
             <Button className="bg-white text-gray-900 px-6 py-3 font-semibold rounded-none">
@@ -102,7 +102,7 @@ export default function EthiopianFootballPage() {
               <p className="text-lg text-gray-600 leading-relaxed">
                 Stay informed with the latest updates in Ethiopian football. Our
                 platform brings you real-time news, match scores, and in-depth
-                player profiles. Join a community that celebrates the passion
+                team profiles. Join a community that celebrates the passion
                 and culture of the sport.
               </p>
             </div>
