@@ -1,10 +1,5 @@
-import LiveScores from "./liveScores/page";
+import EthiopianFootballPage from "./landing-page/page";
 
 export default function HomePage() {
-  return (
-    <div>
-        <LiveScores/>
-
-    </div>
-  );
+  return <EthiopianFootballPage />;
 }

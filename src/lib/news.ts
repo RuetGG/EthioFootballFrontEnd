@@ -15,8 +15,8 @@ const DEFAULT_NEWS: Record<string, string[]> = {
 
 export type FetchNewsOptions = {
   signal?: AbortSignal;
-  leagues?: string; // e.g., "ETH|EPL"
-  baseUrl?: string; // optional override
+  leagues?: string;
+  baseUrl?: string;
 };
 
 /**

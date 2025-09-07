@@ -1,0 +1,175 @@
+{
+    "leagueId": 363,
+    "leagueName": "Premier League",
+    "country": "Ethiopia",
+    "countryFlag": "",
+    "season": 2021,
+    "standings": [
+        {
+            "rank": 1,
+            "teamName": "Kedus Giorgis",
+            "teamLogo": "https://media.api-sports.io/football/teams/4119.png",
+            "points": 65,
+            "matchesPlayed": 30,
+            "wins": 18,
+            "losses": 1,
+            "draws": 11,
+            "goalsDiff": 39
+        },
+        {
+            "rank": 2,
+            "teamName": "Fasil Ketema",
+            "teamLogo": "https://media.api-sports.io/football/teams/4117.png",
+            "points": 61,
+            "matchesPlayed": 30,
+            "wins": 18,
+            "losses": 5,
+            "draws": 7,
+            "goalsDiff": 26
+        },
+        {
+            "rank": 3,
+            "teamName": "Sidama Bunna",
+            "teamLogo": "https://media.api-sports.io/football/teams/4123.png",
+            "points": 48,
+            "matchesPlayed": 30,
+            "wins": 12,
+            "losses": 6,
+            "draws": 12,
+            "goalsDiff": 10
+        },
+        {
+            "rank": 5,
+            "teamName": "Welayta Dicha",
+            "teamLogo": "https://media.api-sports.io/football/teams/4124.png",
+            "points": 42,
+            "matchesPlayed": 30,
+            "wins": 11,
+            "losses": 10,
+            "draws": 9,
+            "goalsDiff": -1
+        },
+        {
+            "rank": 6,
+            "teamName": "Ethiopia Bunna",
+            "teamLogo": "https://media.api-sports.io/football/teams/4116.png",
+            "points": 42,
+            "matchesPlayed": 30,
+            "wins": 11,
+            "losses": 10,
+            "draws": 9,
+            "goalsDiff": -8
+        },
+        {
+            "rank": 7,
+            "teamName": "Arba Minch Kenema",
+            "teamLogo": "https://media.api-sports.io/football/teams/4126.png",
+            "points": 40,
+            "matchesPlayed": 30,
+            "wins": 9,
+            "losses": 8,
+            "draws": 13,
+            "goalsDiff": 1
+        },
+        {
+            "rank": 8,
+            "teamName": "Wolkite Ketema",
+            "teamLogo": "https://media.api-sports.io/football/teams/9987.png",
+            "points": 38,
+            "matchesPlayed": 30,
+            "wins": 9,
+            "losses": 10,
+            "draws": 11,
+            "goalsDiff": -3
+        },
+        {
+            "rank": 9,
+            "teamName": "Mekelakeya",
+            "teamLogo": "https://media.api-sports.io/football/teams/4120.png",
+            "points": 37,
+            "matchesPlayed": 30,
+            "wins": 9,
+            "losses": 11,
+            "draws": 10,
+            "goalsDiff": 0
+        },
+        {
+            "rank": 10,
+            "teamName": "Hadiya Hosaena",
+            "teamLogo": "https://media.api-sports.io/football/teams/9983.png",
+            "points": 37,
+            "matchesPlayed": 30,
+            "wins": 8,
+            "losses": 9,
+            "draws": 13,
+            "goalsDiff": -4
+        },
+        {
+            "rank": 11,
+            "teamName": "Adama Kenema",
+            "teamLogo": "https://media.api-sports.io/football/teams/4110.png",
+            "points": 35,
+            "matchesPlayed": 30,
+            "wins": 6,
+            "losses": 7,
+            "draws": 17,
+            "goalsDiff": 1
+        },
+        {
+            "rank": 12,
+            "teamName": "Bahardar",
+            "teamLogo": "https://media.api-sports.io/football/teams/4112.png",
+            "points": 35,
+            "matchesPlayed": 30,
+            "wins": 8,
+            "losses": 11,
+            "draws": 11,
+            "goalsDiff": 0
+        },
+        {
+            "rank": 13,
+            "teamName": "Dire Dawa Kenema",
+            "teamLogo": "https://media.api-sports.io/football/teams/4115.png",
+            "points": 33,
+            "matchesPlayed": 30,
+            "wins": 8,
+            "losses": 13,
+            "draws": 9,
+            "goalsDiff": -12
+        },
+        {
+            "rank": 14,
+            "teamName": "Addis Ababa Ketema",
+            "teamLogo": "https://media.api-sports.io/football/teams/4129.png",
+            "points": 32,
+            "matchesPlayed": 30,
+            "wins": 7,
+            "losses": 12,
+            "draws": 11,
+            "goalsDiff": -5
+        },
+        {
+            "rank": 15,
+            "teamName": "Sebeta Kenema",
+            "teamLogo": "https://media.api-sports.io/football/teams/9985.png",
+            "points": 25,
+            "matchesPlayed": 30,
+            "wins": 5,
+            "losses": 15,
+            "draws": 10,
+            "goalsDiff": -24
+        },
+        {
+            "rank": 16,
+            "teamName": "Jimma Aba Jifar",
+            "teamLogo": "https://media.api-sports.io/football/teams/9984.png",
+            "points": 23,
+            "matchesPlayed": 30,
+            "wins": 6,
+            "losses": 19,
+            "draws": 5,
+            "goalsDiff": -20
+        }
+    ],
+    "lastUpdated": ""
+}

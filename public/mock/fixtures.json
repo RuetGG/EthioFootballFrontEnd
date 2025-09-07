@@ -1,0 +1,36 @@
+[
+  {
+    "id": "12345",
+    "league": "EPL",
+    "date_utc": "2024-05-06T14:00:00Z",
+    "home_team": "Arsenal",
+    "away_team": "Manchester United",
+    "status": "Scheduled",
+    "score": "0-0",
+    "home_logo": "https://media.api-sports.io/football/teams/1001.png",
+    "away_logo": "https://media.api-sports.io/football/teams/1002.png",
+    "last_updated": "2024-05-01T12:00:00Z"
+  },
+  {
+    "id": "12346",
+    "league": "EPL",
+    "date_utc": "2024-05-07T16:30:00Z",
+    "home_team": "Chelsea",
+    "away_team": "Liverpool",
+    "status": "Scheduled",
+    "score": "0-0",
+    "home_logo": "https://media.api-sports.io/football/teams/1003.png",
+    "away_logo": "https://media.api-sports.io/football/teams/1004.png",
+    "last_updated": "2024-05-01T12:30:00Z"
+  },
+  {
+    "id": "12347",
+    "league": "EPL",
+    "date_utc": "2024-05-08T19:00:00Z",
+    "home_team": "Manchester City",
+    "away_team": "Tottenham",
+    "status": "Scheduled",
+    "home_logo": "https://media.api-sports.io/football/teams/1005.png",
+    "away_logo": "https://media.api-sports.io/football/teams/1001.png"
+  }
+]

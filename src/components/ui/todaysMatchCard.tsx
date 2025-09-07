@@ -1,24 +1,94 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 
-const MatchCard = ({ league, homeTeam, awayTeam, score, isLive }: any) => {
+interface MatchCardProps {
+  league: string;
+  homeTeam: string;
+  awayTeam: string;
+  score: string;
+  isLive: boolean;
+  homeLogo?: string;
+  awayLogo?: string;
+}
+
+const MatchCard: React.FC<MatchCardProps> = ({
+  league,
+  homeTeam,
+  awayTeam,
+  score,
+  isLive,
+  homeLogo,
+  awayLogo,
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
+
   return (
-    <div className="border border-gray-300 shadow-md rounded-md py-4 px-10 my-2 w-full bg-white transition-shadow  hover:shadow-2xl">
-      <div className="text-sm text-gray-500 mb-2">{league}</div>
-
-      <div className="flex justify-between items-center mb-2">
-        <p className="font-medium">{homeTeam}</p>
-        <p className="font-bold">{score}</p>
-        <p className="font-medium">{awayTeam}</p>
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        setIsPressed(false);
+      }}
+      onMouseDown={() => setIsPressed(true)}
+      onMouseUp={() => setIsPressed(false)}
+      onTouchStart={() => setIsPressed(true)}
+      onTouchEnd={() => setIsPressed(false)}
+      className="relative border border-gray-200 rounded-xl py-4 px-6 my-3 w-full transition-all duration-300 overflow-hidden"
+      style={{
+        backgroundColor: "#FFFFFF",
+        boxShadow: isHovered
+          ? "0 4px 20px -5px rgba(208, 230, 215, 0.7), 0 4px 8px -4px rgba(0,0,0,0.05)"
+          : "0 3px 10px rgba(0,0,0,0.05)",
+        transform: isHovered ? (isPressed ? "scale(0.98)" : "scale(1.02)") : "scale(1)",
+        cursor: "pointer",
+      }}
+    >
+      <div className="flex justify-between items-center mb-4 relative z-10">
+        <span className="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+          {league}
+        </span>
+        <span
+          className={`text-xs font-medium px-3 py-1 rounded-full ${
+            isLive ? 'bg-red-500 text-white' : 'bg-gray-600 text-white'
+          }`}
+        >
+          {isLive ? "LIVE" : "FT"}
+        </span>
       </div>
 
-      {isLive ? (
-        <div className="bg-red-600 text-white text-xs px-2 py-1 rounded inline-block">
-          Live
+      <div className="flex items-center justify-between relative z-10">
+        <div className="flex flex-col items-center w-5/12">
+          {homeLogo ? (
+            <img src={homeLogo} alt={homeTeam} className="h-12 w-12 object-contain mb-2" />
+          ) : (
+            <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center mb-2">
+              <span className="text-xs font-bold text-gray-500">HOME</span>
+            </div>
+          )}
+          <span className="font-semibold text-base text-gray-800 text-center truncate w-full">
+            {homeTeam}
+          </span>
         </div>
-      ):
-      <div className="bg-green-700 text-white text-xs px-2 py-1 rounded inline-block">
-          FT
-        </div> }
+
+        <div className="flex flex-col items-center w-2/12">
+          <span className="font-bold text-gray-800 text-xl mb-1">{score}</span>
+          <div className="w-full h-px bg-gray-200"></div>
+        </div>
+
+        <div className="flex flex-col items-center w-5/12">
+          {awayLogo ? (
+            <img src={awayLogo} alt={awayTeam} className="h-12 w-12 object-contain mb-2" />
+          ) : (
+            <div className="h-12 w-12 rounded-full bg-gray-100 flex items-center justify-center mb-2">
+              <span className="text-xs font-bold text-gray-500">AWAY</span>
+            </div>
+          )}
+          <span className="font-semibold text-base text-gray-800 text-center truncate w-full">
+            {awayTeam}
+          </span>
+        </div>
+      </div>
     </div>
   );
 };
