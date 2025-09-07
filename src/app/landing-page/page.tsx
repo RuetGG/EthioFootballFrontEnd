@@ -14,7 +14,6 @@ import {
 export default function EthiopianFootballPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
       <section
         id="hero"
         className="relative h-screen flex items-center justify-center overflow-hidden"
@@ -28,40 +27,6 @@ export default function EthiopianFootballPage() {
 
         <div className="absolute inset-0 bg-black/40 z-10"></div>
 
-        {/* <header className="fixed top-0 left-0 w-full z-50 bg-green-900 px-8 py-4 flex items-center justify-between shadow-md">
-          <div className="flex items-center space-x-20">
-        
-            <Link href="/" className="text-2xl  text-white">
-              Logo
-            </Link>
-
-          
-            <nav className="flex space-x-6 text-white font-medium">
-              <Link href="#hero" className="hover:text-amber-400 transition">
-                Home Page
-              </Link>
-              <Link href="#about" className="hover:text-amber-400 transition">
-                About Us
-              </Link>
-              <Link
-                href="#services"
-                className="hover:text-amber-400 transition"
-              >
-                Services
-              </Link>
-              <Link href="#feature" className="hover:text-amber-400 transition">
-                Features
-              </Link>
-            </nav>
-          </div>
-
-         
-          <Button className="bg-white text-gray-900 px-4 py-2 rounded-full shadow-md hover:bg-gray-100 flex items-center gap-2">
-            <Globe className="h-5 w-5" />
-            ENG
-          </Button>
-        </header> */}
-
         <div className="absolute bottom-0 left-0 z-10 text-white p-8 md:p-12 max-w-2xl">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-amber-400 leading-tight">
             Experience the Thrill <br /> of Ethiopian Football
@@ -69,7 +34,7 @@ export default function EthiopianFootballPage() {
           <p className="text-lg md:text-xl mb-6 text-gray-100">
             Join us in celebrating the passion and excitement of Ethiopian
             football. Stay updated with the latest news, match results, and
-            player stories.
+            team stories.
           </p>
           <div className="flex gap-4">
             <Button className="bg-white text-gray-900 px-6 py-3 font-semibold rounded-none">
@@ -103,7 +68,7 @@ export default function EthiopianFootballPage() {
               <p className="text-lg text-gray-600 leading-relaxed">
                 Stay informed with the latest updates in Ethiopian football. Our
                 platform brings you real-time news, match scores, and in-depth
-                player profiles. Join a community that celebrates the passion
+                team profiles. Join a community that celebrates the passion
                 and culture of the sport.
               </p>
             </div>

@@ -56,6 +56,7 @@ export default function CompareStats({ teamA, teamB }: CompareStatsProps) {
       teamB: getWinsCount(teamB.recent_form),
     },
   ];
+  console.log(teamA.recent_form, teamB.recent_form)
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6 mb-8">

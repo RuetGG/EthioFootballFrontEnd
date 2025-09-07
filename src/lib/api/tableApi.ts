@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { apiClient } from "../apiClient";
+import { createApiClient } from "../apiClient";
 
-type Standing = {
+export type Standing = {
   rank: number;
   teamName: string;
   teamLogo: string;
@@ -13,7 +13,7 @@ type Standing = {
   goalsDiff: number;
 };
 
-type LeagueResponse = {
+export type LeagueResponse = {
   leagueId: number;
   leagueName: string;
   country: string;
@@ -25,22 +25,15 @@ type LeagueResponse = {
 
 export const tableApi = createApi({
   reducerPath: "tableApi",
-  baseQuery: apiClient,
+  baseQuery: createApiClient({ mockFile: "table" }),
   tagTypes: ["Table"],
   endpoints: (builder) => ({
     getTable: builder.query<LeagueResponse, { league?: string; season?: string } | void>({
-      query: (params) => {
-        if (!process.env.NEXT_PUBLIC_API_URL) {
-          return "/table";
-        }
-
-        const searchParams = new URLSearchParams();
-        if (params?.league) searchParams.append("league", params.league);
-        if (params?.season) searchParams.append("season", params.season);
-
-        return `/standings?${searchParams.toString()}`;
+      query: (params = {}) => {
+        const league = params?.league || "ETH";
+        const season = params?.season || "2022";
+        return `/api/standings?league=${league}&season=${season}`;
       },
-      providesTags: ["Table"],
     }),
   }),
 });

@@ -1,43 +1,36 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { apiClient } from '../apiClient';
+// // src/lib/api/liveScoreApi.ts
+// import { createApi } from "@reduxjs/toolkit/query/react";
+// import { createApiClient } from "../apiClient";
 
-type Score = {
-  id: string;
-  home_team: string;
-  away_team: string;
-  home_team_score: string;
-  away_team_score: string;
-  home_team_logo?: string;
-  away_team_logo?: string;
-  league: string;
-  status: string;
-};
+// export type TeamInfo = { name: string; logo: string };
 
-type LiveScoreResponse = {
-  score: Score[];
-  freshness: {
-    source: string;
-    retrieved: string;
-  };
-};
+// export type LiveScoreFixture = {
+//   fixture_id: number;
+//   date: string;
+//   venue: string;
+//   league: string;
+//   round: string;
+//   home_team: TeamInfo;
+//   away_team: TeamInfo;
+//   goals: { home: number; away: number };
+//   score: any;
+//   status: { long: string; short: string; Elapsed: number; extra: number };
+// };
 
-export const livescoreApi = createApi({
-  reducerPath: "livescoreApi",
-  baseQuery: apiClient,
-  tagTypes: ["LiveScore"],
-  endpoints: (builder) => ({
-    getLiveScore: builder.query<LiveScoreResponse, { league?: string; team?: string; from?: string; to?: string } | void>({
-  query: (params) => {
-    if (!process.env.NEXT_PUBLIC_API_URL) {
-      return '/livescore';
-    }
-   
+// export type LiveScoreResponse = { result: LiveScoreFixture[] };
 
-    return `/livescore`;
-  },
-})
+// export const liveScoreApi = createApi({
+//   reducerPath: "liveScoreApi",
+//   baseQuery: createApiClient({ mockFile: "livescore" }),
+//   tagTypes: ["LiveScores"],
+//   endpoints: (builder) => ({
+//     getLiveScores: builder.query<LiveScoreResponse, { league?: string } | void>({
+//       query: (params) => `/live${params?.league ? `?league=${params.league}` : ""}`,
+//       transformResponse: (response: any) => ({
+//         result: Array.isArray(response?.result) ? response.result : [],
+//       }),
+//     }),
+//   }),
+// });
 
-  }),
-});
-
-export const { useGetLiveScoreQuery } = livescoreApi;
+// export const { useGetLiveScoresQuery } = liveScoreApi;

@@ -31,7 +31,9 @@ export interface TeamComparison {
     team_b: TeamData;
   };
   source: string;
+
   freshness: string;
+
 }
 
 export interface CompareState {

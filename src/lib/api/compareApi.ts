@@ -1,6 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { apiClient } from '../apiClient';
 import type { ComparisonResponse, CompareParams, TeamComparison, TeamData, FormResult } from '../../types/compare';
+
 export const compareApi = createApi({
   reducerPath: "compareApi",
   baseQuery: apiClient,

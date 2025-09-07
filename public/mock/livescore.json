@@ -1,0 +1,47 @@
+{
+  "result": [
+    {
+      "fixture_id": 0,
+      "date": "2025-09-05T17:30:00+00:00",
+      "venue": "Kongevi IP",
+      "league": "Division 2 - Norra Götaland",
+      "round": "Norra Götaland - 20",
+      "home_team": {
+        "name": "Kongahälla",
+        "logo": "https://media.api-sports.io/football/teams/22935.png"
+      },
+      "away_team": {
+        "name": "Vänersborgs IF",
+        "logo": "https://media.api-sports.io/football/teams/6713.png"
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 2
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "status": {
+        "long": "First Half",
+        "short": "1H",
+        "Elapsed": 43,
+        "extra": 0
+      }
+    }
+  ]
+}

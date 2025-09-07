@@ -219,6 +219,11 @@ export default function ComparePage({ teamA: initialTeamA = '', teamB: initialTe
 
             {/* Stats Comparison */}
             <CompareStats teamA={comparison.comparison_data.team_a} teamB={comparison.comparison_data.team_b} />
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+              <TeamCard team={comparison.comparison_data.team_a} position="left" />
+              <TeamCard team={comparison.comparison_data.team_b} position="right" />
+            </div>
           </>
         )}
       </div>
