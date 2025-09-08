@@ -7,7 +7,8 @@ interface CompareStatsProps {
 
 export default function CompareStats({ teamA, teamB }: CompareStatsProps) {
 
-  const getWinsCount = (form: string[]) => {
+  const getWinsCount = (form: string[] | any[]) => {
+    if (!Array.isArray(form)) return 0;
     return form.filter(result => result === 'W').length;
   };
 

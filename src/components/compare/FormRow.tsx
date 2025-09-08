@@ -36,6 +36,15 @@ export default function FormRow({ form }: FormRowProps) {
     }
   };
 
+  // Handle case where form might be undefined or not an array
+  if (!Array.isArray(form) || form.length === 0) {
+    return (
+      <div className="flex gap-1">
+        <div className="text-sm text-gray-500">No recent form data</div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex gap-1">
       {form.map((result, index) => (

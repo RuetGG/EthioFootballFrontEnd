@@ -40,12 +40,16 @@ export default function TeamCard({ team, position }: TeamCardProps) {
           Honors
         </h3>
         <ul className="space-y-2">
-          {team.honors.map((honor, index) => (
-            <li key={index} className="text-sm text-gray-600 flex items-center">
-              <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-              {honor}
-            </li>
-          ))}
+          {Array.isArray(team.honors) && team.honors.length > 0 ? (
+            team.honors.map((honor, index) => (
+              <li key={index} className="text-sm text-gray-600 flex items-center">
+                <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                {honor}
+              </li>
+            ))
+          ) : (
+            <li className="text-sm text-gray-500 italic">No honors recorded</li>
+          )}
         </ul>
       </div>
 
@@ -63,14 +67,18 @@ export default function TeamCard({ team, position }: TeamCardProps) {
           Notable Players
         </h3>
         <div className="flex flex-wrap gap-2">
-          {team.notable_players.map((player, index) => (
-            <span
-              key={index}
-              className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm"
-            >
-              {player}
-            </span>
-          ))}
+          {Array.isArray(team.notable_players) && team.notable_players.length > 0 ? (
+            team.notable_players.map((player, index) => (
+              <span
+                key={index}
+                className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm"
+              >
+                {player}
+              </span>
+            ))
+          ) : (
+            <span className="text-sm text-gray-500 italic">No notable players listed</span>
+          )}
         </div>
       </div>
 
