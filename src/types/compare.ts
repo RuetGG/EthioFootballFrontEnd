@@ -13,8 +13,8 @@ export interface TeamStats {
 
 export interface ComparisonResponse {
   comparison_data: {
-    team_a: TeamStats;
-    team_b: TeamStats;
+    team_a: TeamData;
+    team_b: TeamData;
   };
 }
 
