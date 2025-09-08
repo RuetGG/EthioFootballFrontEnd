@@ -14,7 +14,10 @@ export const compareApi = createApi({
         searchParams.append('teamB', teamB);
         searchParams.append('league', league);
         
-        return `/compare/teams?${searchParams.toString()}`;
+        return {
+          url: `/compare/teams?${searchParams.toString()}`,
+          method: 'POST'
+        };
       },
       transformResponse: (response: ComparisonResponse): TeamComparison => {
         // Ensure arrays exist and have proper structure
