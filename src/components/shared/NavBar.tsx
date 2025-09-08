@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Globe, User } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import FootballLogo from "./FootballLogo";
 
 const navItems = [
   { name: "Home", href: "/landing-page" },
@@ -79,12 +80,15 @@ function NavBar() {
           {/* Logo + desktop nav */}
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex shrink-0 items-center">
-              <div
-                className={`${isHome ? "text-white" : "text-green-700"}
-                   text-2xl font-bold italic `}
-              >
-                Logo
-              </div>
+              <Link href="/landing-page" className="flex items-center space-x-2">
+                <FootballLogo 
+                  size={40} 
+                  className={`${isHome ? "text-black" : "text-green-700"}`}
+                />
+                <span className={`${isHome ? "text-white" : "text-green-700"} text-xl font-bold`}>
+                  EthioFootball
+                </span>
+              </Link>
             </div>
             <div className=" hidden sm:ml-6 sm:block w-full">
               <div className="flex -center justify-center  space-x-4">
