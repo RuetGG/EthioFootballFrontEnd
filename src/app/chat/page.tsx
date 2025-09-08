@@ -25,10 +25,9 @@ export default function MainContent() {
 
     try {
       if (process.env.NEXT_PUBLIC_API_URL) {
-
         const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/intent/parse`,
-          { text: finalMessage },
+          `${process.env.NEXT_PUBLIC_API_URL}/intent/parser`,
+          { userPrompt: finalMessage },
           {
             headers: {
               "Content-Type": "application/json",
@@ -37,39 +36,65 @@ export default function MainContent() {
           }
         );
 
-        const botResponse = response.data?.markdown || "No response from server.";
-        setChat((prev) => [...prev, { sender: "bot", text: botResponse }]);
+        // Check if the response contains an error or if API call failed
+        if (response.data?.error) {
+          console.warn("API returned error:", response.data.error);
+          // Fall back to mock data when API returns error
+          const botResponse =
+            mockChatResponses[finalMessage] || 
+            mockChatResponses[finalMessage.toLowerCase()] ||
+            `I understand you're asking about "${finalMessage}". While I'm having trouble connecting to the live data right now, I can help you with general Ethiopian football information. Try asking about specific teams like "St. George vs Fasil Kenema" or "compare St. George and Ethiopia Bunna".`;
+          
+          setChat((prev) => [...prev, { sender: "bot", text: botResponse }]);
+        } else {
+          // Use API response if available, otherwise fall back to mock
+          const botResponse = response.data?.markdown || response.data?.message || 
+            mockChatResponses[finalMessage] || 
+            mockChatResponses[finalMessage.toLowerCase()] ||
+            "I received your message but couldn't process it properly. Try asking about Ethiopian football teams, matches, or league standings!";
+          setChat((prev) => [...prev, { sender: "bot", text: botResponse }]);
+        }
       } else {
-        // Fallback to mock data
+        // Fallback to mock data when no API URL
         const botResponse =
-          mockChatResponses[finalMessage] || "I don't have a response for that yet.";
+          mockChatResponses[finalMessage] || 
+          `I understand you're asking about "${finalMessage}". Here are some things I can help you with:
+
+**Available Topics:**
+- Team comparisons (e.g., "compare St. George and Ethiopia Bunna")
+- Match summaries (e.g., "St. George vs Fasil Kenema Match")
+- EPL Table information
+- Walias (National team) matches
+- Local club information
+
+Try one of the suggested buttons above or ask about specific Ethiopian football topics!`;
 
         setTimeout(() => {
           setChat((prev) => [...prev, { sender: "bot", text: botResponse }]);
           setIsLoading(false);
         }, 500);
+        return; // Exit early to avoid setting loading to false twice
       }
     } catch (error) {
       console.error("Request failed:", error);
       
-      let errorMessage = "Network error. Please try again.";
-      
-      if (axios.isAxiosError(error)) {
-        if (error.response) {
-          // Server responded with error status
-          errorMessage = `Server error: ${error.response.status}`;
-        } else if (error.request) {
-          // Request was made but no response received
-          errorMessage = "No response from server. Please try again.";
-        } else {
-          // Something else happened
-          errorMessage = `Request error: ${error.message}`;
-        }
-      }
+      // Always fall back to mock data or helpful response on error
+      const botResponse =
+        mockChatResponses[finalMessage] || 
+        mockChatResponses[finalMessage.toLowerCase()] ||
+        `I'm having trouble connecting to the server right now, but I can still help! 
+
+**Try these topics:**
+- "EPL Table" - Get Premier League standings
+- "Walias Next Match" - National team fixtures  
+- "Local Clubs" - Ethiopian club information
+- "compare St. George and Ethiopia Bunna" - Team comparison
+
+Or ask me anything about Ethiopian football and I'll do my best to help!`;
       
       setChat((prev) => [
         ...prev,
-        { sender: "bot", text: errorMessage },
+        { sender: "bot", text: botResponse },
       ]);
     } finally {
       setIsLoading(false);
